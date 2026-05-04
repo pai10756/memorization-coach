@@ -239,12 +239,26 @@
       display: grid;
       grid-template-columns: 36px 1fr;
       gap: 10px;
-      align-items: center;
+      align-items: start;
       background: rgba(255, 253, 247, .78);
       border: 1px solid rgba(31, 95, 122, .14);
       border-radius: var(--radius);
       padding: 10px;
       box-shadow: var(--soft-shadow);
+    }
+
+    .process-step strong {
+      color: var(--deep);
+      font-size: 1rem;
+      display: block;
+      margin-top: 4px;
+    }
+
+    .process-step .step-desc {
+      color: rgba(61, 40, 23, .72);
+      font-size: .92rem;
+      margin-top: 4px;
+      line-height: 1.55;
     }
 
     .num {
@@ -767,6 +781,205 @@
       display: none !important;
     }
 
+    .units-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: rgba(255, 253, 247, .92);
+      border: 1px solid rgba(31, 95, 122, .16);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .units-table th,
+    .units-table td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(31, 95, 122, .12);
+      vertical-align: top;
+    }
+
+    .units-table thead th {
+      background: rgba(31, 95, 122, .1);
+      color: var(--deep);
+      font-weight: 900;
+      font-size: .98rem;
+    }
+
+    .units-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .units-table td.cue {
+      color: var(--coral);
+      font-weight: 900;
+      white-space: nowrap;
+      width: 36%;
+    }
+
+    .layer-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .layer-tabs button {
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: var(--sand);
+      color: var(--ink);
+      font-weight: 900;
+      box-shadow: var(--soft-shadow);
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    .layer-tabs button.active {
+      background: var(--deep);
+      color: #fff;
+    }
+
+    .layer-card {
+      display: grid;
+      gap: 12px;
+      background: rgba(255, 253, 247, .9);
+      border: 1px solid rgba(31, 95, 122, .16);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--soft-shadow);
+      margin-bottom: 14px;
+    }
+
+    .layer-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .layer-card .tag {
+      background: rgba(231, 160, 114, .22);
+      color: var(--coral);
+    }
+
+    .layer-hint {
+      background: rgba(232, 216, 184, .35);
+      border-left: 5px solid var(--coral);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: .96rem;
+      color: rgba(61, 40, 23, .82);
+    }
+
+    .layer-step-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .three-layer-flow {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+
+    .three-layer-flow .flow-step {
+      background: rgba(255, 253, 247, .92);
+      border: 1px solid rgba(31, 95, 122, .18);
+      border-radius: var(--radius);
+      padding: 12px;
+      box-shadow: var(--soft-shadow);
+      text-align: center;
+    }
+
+    .three-layer-flow .flow-step strong {
+      display: block;
+      color: var(--deep);
+      margin-bottom: 4px;
+    }
+
+    .three-layer-flow .flow-step span {
+      color: rgba(61, 40, 23, .7);
+      font-size: .9rem;
+    }
+
+    @media (max-width: 600px) {
+      .three-layer-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-flow {
+      display: grid;
+      gap: 10px;
+      counter-reset: pstep;
+    }
+
+    .step-flow .step-flow-item {
+      counter-increment: pstep;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 10px;
+      align-items: start;
+      background: rgba(255, 253, 247, .85);
+      border: 1px solid rgba(31, 95, 122, .14);
+      border-left: 5px solid var(--green);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .step-flow .step-flow-item::before {
+      content: counter(pstep);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+    }
+
+    .step-flow .step-flow-item h4 {
+      margin: 0 0 3px 0;
+      color: var(--deep);
+      font-family: var(--serif);
+    }
+
+    .step-flow .step-flow-item p {
+      color: rgba(61, 40, 23, .76);
+      font-size: .94rem;
+      line-height: 1.6;
+    }
+
+    .first-char-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .first-char-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff, #F7E9CF);
+      border: 1px solid rgba(31, 95, 122, .18);
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--deep);
+      box-shadow: var(--soft-shadow);
+    }
+
     @media (min-width: 720px) {
       .topbar-inner {
         grid-template-columns: auto 1fr;
@@ -845,6 +1058,7 @@
       <nav class="nav" aria-label="模式導覽">
         <button data-mode="home">首頁</button>
         <button data-mode="story">故事模式</button>
+        <button data-mode="threelayer">三層練</button>
         <button data-mode="learn">逐段學習</button>
         <button data-mode="skeleton">關鍵詞骨架</button>
         <button data-mode="test">遮蔽測試</button>
@@ -861,10 +1075,10 @@
         <div class="hero-layout">
           <div class="hero-copy">
             <h1>《海洋的殺手》背誦攻略小教室</h1>
-            <p class="subtitle">用故事線、關鍵詞和互動測驗，把課文一步一步背起來。</p>
+            <p class="subtitle">白話文不要逐字硬背。先記骨架、再說大意、最後才還原原文。</p>
             <div class="hero-actions">
-              <button class="primary-btn" data-mode="story">開始故事模式</button>
-              <button class="secondary-btn" data-mode="learn">進入逐段學習</button>
+              <button class="primary-btn" data-mode="threelayer">開始三層練</button>
+              <button class="secondary-btn" data-mode="story">看故事總覽</button>
               <button class="small-btn" data-mode="challenge">15 分鐘闖關</button>
             </div>
             <div>
@@ -886,6 +1100,25 @@
         <p>先把每一段想成一張畫面。點開卡片，就能看到原文、白話意思、關鍵詞和小測驗。</p>
       </div>
       <div class="grid card-grid" id="storyCards"></div>
+    </section>
+
+    <section id="threelayer" class="view">
+      <div class="section-head">
+        <h2>三層練：骨架 → 大意 → 還原</h2>
+        <p>白話文不要逐字硬背。先記骨架抓順序，再用自己的話講大意，最後才貼回課本原文。</p>
+      </div>
+      <div class="three-layer-flow">
+        <div class="flow-step"><strong>第一層</strong><span>只背骨架</span></div>
+        <div class="flow-step"><strong>第二層</strong><span>看骨架說大意</span></div>
+        <div class="flow-step"><strong>第三層</strong><span>貼回原文</span></div>
+      </div>
+      <div class="mode-actions" id="threeLayerParaPicker"></div>
+      <div class="layer-tabs" id="threeLayerTabs">
+        <button data-layer="1" class="active">第一層 骨架</button>
+        <button data-layer="2">第二層 大意</button>
+        <button data-layer="3">第三層 原文</button>
+      </div>
+      <div id="threeLayerContent"></div>
     </section>
 
     <section id="learn" class="view">
@@ -962,10 +1195,51 @@
     <section id="parent" class="view">
       <div class="section-head">
         <h2>家長陪背模式</h2>
-        <p>家長不用一直叫孩子重背。先問故事，再給提示，最後才看原文。</p>
+        <p>白話文最好的背法是：先背骨架，再說大意，最後才還原原文。家長照下面六步驟陪，不用一字不差。</p>
       </div>
       <div class="panel">
-        <h3>孩子卡住時的提示方式</h3>
+        <h3>陪背六步驟</h3>
+        <div class="step-flow">
+          <div class="step-flow-item">
+            <div>
+              <h4>先問「這段在幹嘛？」</h4>
+              <p>不要先背原文。例如問：「這段是在說小鴨去哪裡，還是在說塑膠怎麼變小？」孩子答出主題再開始拆。</p>
+            </div>
+          </div>
+          <div class="step-flow-item">
+            <div>
+              <h4>畫出骨架</h4>
+              <p>把整段濃縮成四到七個關鍵詞，例如段 2：塑膠變微粒 → 微粒更毒 → 浮游生物吃下去 → 深海也有 → 食物鏈傳遞 → 人類吃海鮮。</p>
+            </div>
+          </div>
+          <div class="step-flow-item">
+            <div>
+              <h4>讓孩子看骨架說一次</h4>
+              <p>不要求跟課本一樣，只要意思有到。先讓他用自己的話講出來。</p>
+            </div>
+          </div>
+          <div class="step-flow-item">
+            <div>
+              <h4>才開始貼近原文</h4>
+              <p>這時候再翻課本，把孩子說的大意換成課本語氣。</p>
+            </div>
+          </div>
+          <div class="step-flow-item">
+            <div>
+              <h4>遮住原文，只留骨架</h4>
+              <p>讓孩子看著骨架背原文。</p>
+            </div>
+          </div>
+          <div class="step-flow-item">
+            <div>
+              <h4>遮住骨架，只留第一個字</h4>
+              <p>例如段 2 留「塑、微、浮、深、食、人」，讓孩子自己接下去。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>孩子卡住時的提示階梯</h3>
         <div class="hint-ladder">
           <div>給畫面提示：先問「你腦中看到哪一張圖？」</div>
           <div>給關鍵詞提示：念出兩三個關鍵詞，讓孩子接下去。</div>
@@ -991,16 +1265,23 @@
     const paragraphs = [
       {
         id: 1,
-        title: "美麗卻堆滿垃圾的亨德孫島",
+        title: "塑膠小鴨環遊世界",
         tag: "小鴨漂流",
         art: "art-1",
         image: "assets/illustrations/ocean-ducks-currents.png",
         summary: "塑膠小鴨落海後，跟著洋流漂到世界各地，連深海也出現塑膠垃圾。",
         original: "在北太平洋落海。這些小鴨隨波逐流，有的北上，陸續漂流到北極海、美國東岸，甚至到達英國。有的南下，漂向夏威夷、印尼，還一路到澳洲和南美洲。原來每洋中有一條條如高速公路的洋流，不斷循環流動，這也讓這些塑膠旅客順著洋流漂游到各地。在洋流的環流系統中，不只是海面漂流著塑膠垃圾，連深海也被塑膠大軍占領。",
-        plain: "一批塑膠小鴨掉進海裡後，跟著洋流到處漂流。有些漂到北極海、美國東岸、英國，有些漂到夏威夷、印尼、澳洲、南美洲。原來海洋裡有像高速公路一樣的洋流，會把塑膠垃圾帶到世界各地。塑膠垃圾不只在海面上，連深海也有。",
+        plain: "小鴨在北太平洋落海後，有些往北漂到北極海、美國東岸和英國，有些往南漂到夏威夷、印尼、澳洲和南美洲。原來海洋中有像高速公路一樣的洋流，讓塑膠垃圾漂到各地，而且不只海面，連深海都有塑膠。",
         keywords: ["北太平洋", "小鴨落海", "隨波逐流", "北極海", "美國東岸", "英國", "夏威夷", "印尼", "澳洲", "南美洲", "洋流", "高速公路", "循環流動", "深海", "塑膠大軍"],
-        memory: "小鴨落海 → 洋流帶路 → 漂到世界各地 → 深海也有塑膠",
-        skeleton: ["小鴨落海", "洋流", "北上南下", "世界各地", "深海也有塑膠"],
+        memory: "小鴨落海 → 北上 → 南下 → 洋流高速公路 → 海面深海都有塑膠",
+        skeleton: ["小鴨落海", "北上", "南下", "洋流高速公路", "海面深海都有塑膠"],
+        units: [
+          { meaning: "小鴨在北太平洋落海", cue: "小鴨落海" },
+          { meaning: "有些往北漂到北極海、美國東岸、英國", cue: "北上" },
+          { meaning: "有些往南漂到夏威夷、印尼、澳洲、南美洲", cue: "南下" },
+          { meaning: "海中有像高速公路一樣的洋流", cue: "洋流高速公路" },
+          { meaning: "海面和深海都漂著塑膠", cue: "海面深海都有塑膠" }
+        ],
         questions: ["小鴨是怎麼到世界各地的？", "課文把洋流比喻成什麼？", "塑膠垃圾只在海面上嗎？"]
       },
       {
@@ -1011,10 +1292,18 @@
         image: "assets/illustrations/microplastics-food-chain.png",
         summary: "塑膠被日照與風浪打碎成微粒，進入食物鏈，人類吃海鮮也可能受影響。",
         original: "塑膠在海中受到日照與風浪拍打，分解成極小的塊狀、細絲或球體狀的塑膠微粒。科學家發現，這些幾乎看不見的塑膠，不僅會釋放有毒物質，影響海洋生物的生長，還會吸附海洋汙染物與細菌，成為更毒的懸浮物。由於微粒體積小，常被浮游生物吸收食入，連生活在地球最深的馬里亞納海溝中的浮游生物，體內也藏著塑膠微粒，科學家還將牠們命名為「塑膠鉤蝦」。而在「大魚吃小魚，小魚吃蝦米」的食物鏈下，海洋正形成一種駭人的生態系統——海洋塑膠生物圈。你可曾想過，大口吃著美味海鮮時，到底吃進了什麼？",
-        plain: "塑膠在海裡被太陽曬、被風浪打，會碎成很小很小的塑膠微粒。這些微粒可能有毒，也會吸附髒東西和細菌。因為太小了，浮游生物會吃下去，連深海裡的生物體內也有塑膠。最後透過食物鏈，人類吃海鮮時，也可能把塑膠微粒吃進身體。",
+        plain: "塑膠在海中受到日照和風浪拍打，分解成極小的塑膠微粒。這些微粒會釋放有毒物質，也會吸附汙染物與細菌。微粒太小，常被浮游生物吃下去，連馬里亞納海溝的生物體內也有塑膠微粒。在食物鏈下，海洋形成塑膠生物圈。人類吃海鮮時，也可能吃進塑膠。",
         keywords: ["日照", "風浪拍打", "塑膠微粒", "有毒物質", "海洋汙染物", "細菌", "浮游生物", "馬里亞納海溝", "塑膠鉤蝦", "食物鏈", "大魚吃小魚", "海洋塑膠生物圈", "海鮮"],
-        memory: "塑膠變微粒 → 被小生物吃 → 進入食物鏈 → 人類也可能吃進去",
-        skeleton: ["日照風浪", "塑膠微粒", "浮游生物", "食物鏈", "人類海鮮"],
+        memory: "塑膠變微粒 → 微粒更毒 → 浮游生物吃下去 → 深海也中招 → 大魚吃小魚 → 最後回到人類",
+        skeleton: ["塑膠變微粒", "微粒更毒", "浮游生物吃下去", "深海也有", "食物鏈傳遞", "人類吃海鮮也受影響"],
+        units: [
+          { meaning: "塑膠被日照和風浪打碎", cue: "塑膠變微粒" },
+          { meaning: "微粒有毒，還會吸附髒東西", cue: "微粒更毒" },
+          { meaning: "浮游生物會吃下微粒", cue: "小生物吃下去" },
+          { meaning: "深海生物也有塑膠", cue: "深海也中招" },
+          { meaning: "食物鏈一路傳上去", cue: "大魚吃小魚" },
+          { meaning: "人類吃海鮮也可能吃進去", cue: "最後回到人類" }
+        ],
         questions: ["塑膠為什麼會變成微粒？", "塑膠微粒可能被誰吃下去？", "為什麼人類吃海鮮也可能受影響？"]
       },
       {
@@ -1025,10 +1314,19 @@
         image: "assets/illustrations/sea-life-plastic-harm.png",
         summary: "塑膠像海洋殺手，從海岸到深海都造成傷害，威脅許多海洋生物。",
         original: "無孔不入的塑膠就像海洋的殺手，除了帶來環境改變的威脅，更對海洋生態造成巨大傷害，從海岸、海面到深海都無一倖免。海洋經常上演著種種觸目驚心的畫面：吞食塑膠的海鳥、被魚網困住的海龜、遭垃圾覆蓋的珊瑚礁、體內充滿塑膠垃圾的鯨魚……根據二○一六年聯合國報告，全球受海洋塑膠垃圾影響，而且面臨生存威脅的生物，已高達八百種。",
-        plain: "塑膠垃圾到處都有，像海洋殺手一樣，傷害海洋環境和生物。從海岸、海面到深海都受到影響。海鳥會吃下塑膠，海龜會被漁網困住，珊瑚礁會被垃圾覆蓋，鯨魚肚子裡也可能塞滿塑膠。聯合國報告指出，已有很多海洋生物受到塑膠垃圾威脅。",
+        plain: "塑膠無孔不入，像海洋殺手。海岸、海面、深海都受害：海鳥吞塑膠、海龜被魚網困住、珊瑚礁被垃圾覆蓋、鯨魚體內充滿塑膠。聯合國報告指出，受威脅的生物已達八百種。",
         keywords: ["無孔不入", "海洋殺手", "環境改變", "海洋生態", "海岸", "海面", "深海", "海鳥", "海龜", "珊瑚礁", "鯨魚", "聯合國報告", "八百種生物"],
-        memory: "海岸到深海 → 動物都受害 → 八百種生物受威脅",
-        skeleton: ["無孔不入", "海鳥海龜", "珊瑚鯨魚", "八百種生物"],
+        memory: "海洋殺手 → 海岸海面深海 → 海鳥、海龜、珊瑚、鯨魚 → 八百種生物受威脅",
+        skeleton: ["海洋殺手", "海岸海面深海", "海鳥海龜珊瑚鯨魚", "八百種生物受威脅"],
+        units: [
+          { meaning: "塑膠無孔不入，像海洋殺手", cue: "海洋殺手" },
+          { meaning: "海岸、海面、深海都受害", cue: "無一倖免" },
+          { meaning: "海鳥吞塑膠", cue: "海鳥" },
+          { meaning: "海龜被魚網困住", cue: "海龜" },
+          { meaning: "珊瑚礁被垃圾覆蓋", cue: "珊瑚" },
+          { meaning: "鯨魚體內充滿塑膠", cue: "鯨魚" },
+          { meaning: "八百種生物受威脅", cue: "八百種" }
+        ],
         questions: ["課文說塑膠像什麼？", "哪些海洋生物受到塑膠影響？", "受威脅的生物大約有多少種？"]
       },
       {
@@ -1039,10 +1337,19 @@
         image: "assets/illustrations/plastic-growth-ocean-waste.png",
         summary: "塑膠便宜耐用又便利，但難以自然分解，每年大量流入海洋。",
         original: "塑膠便宜耐用，取得便利，因此被人們大量使用，但因難以在環境中自然分解，已成為僅次於氣候變遷的全球災難。學者估計，目前每年約有一千一百萬公噸的塑膠垃圾流進海洋，若不採取行動，到二○四○年甚至會增加到兩千九百萬公噸。這些垃圾主要來自人口密集的河川、海岸以及船隻漁具的廢棄物，且大多是一次性的塑膠製品。",
-        plain: "塑膠便宜、好用、耐用，所以人們大量使用。但是塑膠很難自然分解，變成全球大問題。每年有大量塑膠垃圾流進海洋，如果不行動，未來會更多。這些垃圾很多來自河川、海岸、船隻、漁具，以及一次性塑膠製品。",
+        plain: "塑膠便宜、耐用、便利，所以人們大量使用，但難以自然分解，已成為全球災難。每年約一千一百萬公噸塑膠流入海洋，到二○四○年可能增加到兩千九百萬公噸。垃圾主要來自河川、海岸、船隻漁具，以及一次性塑膠製品。",
         keywords: ["便宜", "耐用", "便利", "大量使用", "難以分解", "全球災難", "一千一百萬公噸", "二○四○年", "兩千九百萬公噸", "河川", "海岸", "船隻", "漁具", "一次性塑膠製品"],
-        memory: "塑膠好用 → 大量使用 → 難分解 → 流進海洋越來越多",
-        skeleton: ["便宜耐用", "大量使用", "難分解", "每年流入海洋", "一次性塑膠"],
+        memory: "好用 → 用很多 → 難分解 → 全球災難 → 現在一千一百萬 → 未來兩千九百萬 → 河川海岸船隻漁具一次性塑膠",
+        skeleton: ["好用", "用很多", "難分解", "全球災難", "現在一千一百萬", "未來兩千九百萬", "河川海岸船隻漁具一次性塑膠"],
+        units: [
+          { meaning: "塑膠便宜、耐用、便利", cue: "好用" },
+          { meaning: "所以大量使用", cue: "用很多" },
+          { meaning: "難以自然分解", cue: "難分解" },
+          { meaning: "成為全球災難", cue: "全球災難" },
+          { meaning: "每年一千一百萬公噸流入海洋", cue: "現在很多" },
+          { meaning: "二○四○年可能到兩千九百萬公噸", cue: "未來更多" },
+          { meaning: "來源是河川、海岸、船隻漁具、一次性塑膠", cue: "垃圾來源" }
+        ],
         questions: ["為什麼塑膠被大量使用？", "塑膠最大的問題是什麼？", "到二○四○年可能增加到多少公噸？"]
       },
       {
@@ -1053,10 +1360,19 @@
         image: "assets/illustrations/source-reduction-beach-cleanup.png",
         summary: "面對塑膠危害，要從源頭減塑，也要限塑、淨灘、回收與自備環保用品。",
         original: "人類與生態環境相互影響，正視塑膠危害，「源頭減塑」才是根本解決之道。聯合國在二○一八年提出「塑戰塑決」以維護海洋生態與環境，越來越多國家也發現問題的嚴重性，紛紛制定了「減塑、限塑」相關辦法。除此以外，民間團體自發性舉辦淨灘活動，喚起更多人的關注。人們更配合減塑、回收再利用和自備環保用品等，以行動實踐地球的永續發展。",
-        plain: "人類和環境互相影響，所以要重視塑膠的危害。真正的解決方法是從源頭減少塑膠使用。聯合國和許多國家開始推動減塑、限塑，民間團體也舉辦淨灘活動。每個人也可以自備環保用品、回收再利用，為地球永續努力。",
+        plain: "人類和生態互相影響，要正視塑膠危害；源頭減塑是根本解決。聯合國提出「塑戰塑決」，各國制定減塑限塑辦法；民間團體舉辦淨灘活動。個人也要減塑、回收、自備環保用品，落實永續發展。",
         keywords: ["人類與生態", "相互影響", "正視塑膠危害", "源頭減塑", "聯合國", "塑戰塑決", "減塑", "限塑", "淨灘活動", "回收再利用", "自備環保用品", "永續發展"],
-        memory: "正視危害 → 源頭減塑 → 政府限塑 → 民間淨灘 → 自備環保用品",
-        skeleton: ["正視危害", "源頭減塑", "減塑限塑", "淨灘", "自備環保用品"],
+        memory: "人與環境 → 正視危害 → 源頭減塑 → 聯合國 → 政府限塑 → 民間淨灘 → 個人自備",
+        skeleton: ["人與環境", "正視危害", "源頭減塑", "聯合國", "政府限塑", "民間淨灘", "個人自備"],
+        units: [
+          { meaning: "人類和生態互相影響", cue: "人與環境" },
+          { meaning: "要正視塑膠危害", cue: "正視危害" },
+          { meaning: "源頭減塑是根本解決", cue: "源頭減塑" },
+          { meaning: "聯合國提出塑戰塑決", cue: "聯合國" },
+          { meaning: "各國制定減塑限塑辦法", cue: "政府行動" },
+          { meaning: "民間團體舉辦淨灘活動", cue: "民間行動" },
+          { meaning: "個人減塑、回收、自備環保用品", cue: "個人行動" }
+        ],
         questions: ["根本解決塑膠問題的方法是什麼？", "民間團體可以做什麼？", "我們個人可以怎麼減塑？"]
       },
       {
@@ -1067,15 +1383,28 @@
         image: "assets/illustrations/beach-shell-bottle-cap.png",
         summary: "海洋不斷發出警訊，提醒每個人行動，別讓海邊的貝殼變成瓶蓋。",
         original: "大海面對日益嚴重的塑膠汙染，已不斷發出警訊。我們需要每個人付出行動，否則未來在海邊隨手撿起的可能不是貝殼，而是寶特瓶的瓶蓋……",
-        plain: "海洋塑膠汙染越來越嚴重，海洋正在提醒我們要趕快行動。如果人類不改變，未來到海邊看到的可能不是美麗貝殼，而是塑膠瓶蓋。",
+        plain: "海洋塑膠汙染越來越嚴重，大海發出警訊。每個人都要行動，否則未來在海邊撿到的可能不是貝殼，而是寶特瓶的瓶蓋。",
         keywords: ["大海", "塑膠汙染", "發出警訊", "每個人", "付出行動", "貝殼", "寶特瓶瓶蓋"],
-        memory: "海洋警訊 → 人人行動 → 別讓貝殼變瓶蓋",
-        skeleton: ["海洋警訊", "人人行動", "貝殼不要變瓶蓋"],
+        memory: "汙染嚴重 → 海洋警訊 → 人人行動 → 不是貝殼 → 是瓶蓋",
+        skeleton: ["汙染嚴重", "海洋警訊", "人人行動", "不是貝殼", "是瓶蓋"],
+        units: [
+          { meaning: "海洋塑膠汙染越來越嚴重", cue: "汙染嚴重" },
+          { meaning: "大海發出警訊", cue: "海洋警訊" },
+          { meaning: "每個人都要行動", cue: "人人行動" },
+          { meaning: "未來撿到的可能不是貝殼", cue: "不是貝殼" },
+          { meaning: "而是寶特瓶瓶蓋", cue: "是瓶蓋" }
+        ],
         questions: ["大海發出了什麼警訊？", "我們需要誰付出行動？", "課文最後用貝殼和瓶蓋提醒我們什麼？"]
       }
     ];
 
-    const processSteps = ["先看故事", "背關鍵詞骨架", "遮住測試", "打亂問答", "睡前再背一次"];
+    const processSteps = [
+      { title: "第一層：背骨架", desc: "只記每段四到七個關鍵詞，先抓順序。" },
+      { title: "第二層：說大意", desc: "看著骨架，用自己的話講一次，不用一字不差。" },
+      { title: "第三層：貼回原文", desc: "把自己說的，慢慢換成課本語氣。" },
+      { title: "遮起來自己說", desc: "遮住骨架或原文，只留首字也能接下去。" },
+      { title: "睡前再背一次", desc: "睡前用骨架快速說一遍，明天會更穩。" }
+    ];
     const causalChain = ["塑膠小鴨落海", "洋流帶著塑膠漂到世界各地", "塑膠碎成微粒", "浮游生物、小魚、大魚吃下去", "海鳥、海龜、珊瑚、鯨魚都受害", "人類也可能透過海鮮吃進塑膠", "所以要源頭減塑、淨灘、回收、自備環保用品"];
     const encouragements = [
       "你已經抓到故事順序了，很好。",
@@ -1107,10 +1436,10 @@
 
     const challengeStages = [
       { title: "關卡 1｜2 分鐘", minutes: 2, task: "看故事總覽，先知道課文在說什麼。", mode: "story" },
-      { title: "關卡 2｜3 分鐘", minutes: 3, task: "背段落 1～2 的關鍵詞骨架。", mode: "skeleton" },
-      { title: "關卡 3｜3 分鐘", minutes: 3, task: "背段落 3～4 的關鍵詞骨架。", mode: "skeleton" },
-      { title: "關卡 4｜3 分鐘", minutes: 3, task: "背段落 5～6 的關鍵詞骨架。", mode: "skeleton" },
-      { title: "關卡 5｜2 分鐘", minutes: 2, task: "看因果鏈，從頭講一次課文大意。", mode: "home" },
+      { title: "關卡 2｜3 分鐘", minutes: 3, task: "三層練 第一層：背段落 1～3 骨架，看意思單位記提示。", mode: "threelayer" },
+      { title: "關卡 3｜3 分鐘", minutes: 3, task: "三層練 第一層：背段落 4～6 骨架。", mode: "threelayer" },
+      { title: "關卡 4｜3 分鐘", minutes: 3, task: "三層練 第二層：看骨架用自己的話說每段大意。", mode: "threelayer" },
+      { title: "關卡 5｜2 分鐘", minutes: 2, task: "三層練 第三層：把大意換成課本原文語氣。", mode: "threelayer" },
       { title: "關卡 6｜2 分鐘", minutes: 2, task: "遮住提示，自己說出完整故事線。", mode: "test" }
     ];
 
@@ -1132,7 +1461,9 @@
       challengeDone: JSON.parse(localStorage.getItem("oceanChallengeDone") || "[]"),
       timerLeft: 0,
       timerRunning: false,
-      timerId: null
+      timerId: null,
+      threeLayerPara: Number(localStorage.getItem("oceanThreeLayerPara") || 1),
+      threeLayerLayer: Number(localStorage.getItem("oceanThreeLayerLayer") || 1)
     };
 
     function $(selector, root = document) {
@@ -1204,7 +1535,10 @@
       $("#todayProcess").innerHTML = processSteps.map((step, index) => `
         <div class="process-step">
           <span class="num">${index + 1}</span>
-          <strong>${step}</strong>
+          <div>
+            <strong>${step.title}</strong>
+            <p class="step-desc">${step.desc}</p>
+          </div>
         </div>
       `).join("");
       $("#homeFlow").innerHTML = causalChain.map(item => `<div class="flow-node">${item}</div>`).join("");
@@ -1226,10 +1560,16 @@
             </div>
           </button>
           <div class="story-content">
-            <div><strong>原文</strong><div class="text-block">${p.original}</div></div>
-            <div><strong>白話意思</strong><div class="text-block plain-block">${p.plain}</div></div>
+            <div><strong>第一層：骨架</strong><div class="text-block memory-block">${p.memory}</div></div>
+            <div><strong>意思單位 ↔ 記憶提示</strong>
+              <table class="units-table">
+                <thead><tr><th>意思單位</th><th>記憶提示</th></tr></thead>
+                <tbody>${p.units.map(u => `<tr><td>${u.meaning}</td><td class="cue">${u.cue}</td></tr>`).join("")}</tbody>
+              </table>
+            </div>
+            <div><strong>第二層：白話大意</strong><div class="text-block plain-block">${p.plain}</div></div>
+            <div><strong>第三層：課文原文</strong><div class="text-block">${p.original}</div></div>
             <div><strong>關鍵詞</strong>${chips(p.keywords)}</div>
-            <div><strong>記憶提示</strong><div class="text-block memory-block">${p.memory}</div></div>
             <div><strong>小測驗</strong><ol class="question-list">${p.questions.map(q => `<li>${q}</li>`).join("")}</ol></div>
           </div>
         `;
@@ -1240,6 +1580,72 @@
         });
         box.appendChild(card);
       });
+    }
+
+    function renderThreeLayer() {
+      const picker = $("#threeLayerParaPicker");
+      picker.innerHTML = paragraphs.map(p =>
+        `<button class="small-btn three-layer-para-btn ${p.id === state.threeLayerPara ? "active" : ""}" data-para="${p.id}">段落 ${p.id}</button>`
+      ).join("");
+      $all(".three-layer-para-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.threeLayerPara = Number(btn.dataset.para);
+          save("oceanThreeLayerPara", String(state.threeLayerPara));
+          renderThreeLayer();
+        });
+      });
+
+      $all("#threeLayerTabs button").forEach(btn => {
+        btn.classList.toggle("active", Number(btn.dataset.layer) === state.threeLayerLayer);
+        btn.onclick = () => {
+          state.threeLayerLayer = Number(btn.dataset.layer);
+          save("oceanThreeLayerLayer", String(state.threeLayerLayer));
+          renderThreeLayer();
+        };
+      });
+
+      const p = paragraphs.find(x => x.id === state.threeLayerPara);
+      const box = $("#threeLayerContent");
+      const firstChars = p.skeleton.map(s => s.charAt(0));
+
+      let html = `<article class="layer-card"><h3><span class="tag">段落 ${p.id}</span>${p.title}</h3>`;
+
+      if (state.threeLayerLayer === 1) {
+        html += `
+          <div class="layer-hint">第一層：只背骨架。先把每一段濃縮成這幾個關鍵詞，順序要對，不用一字不差。</div>
+          <strong>骨架關鍵詞</strong>
+          <div class="skeleton-flow">${p.skeleton.map(s => `<div class="skeleton-node">${s}</div>`).join("")}</div>
+          <strong>意思單位 ↔ 記憶提示</strong>
+          <table class="units-table">
+            <thead><tr><th>意思單位</th><th>記憶提示</th></tr></thead>
+            <tbody>${p.units.map(u => `<tr><td>${u.meaning}</td><td class="cue">${u.cue}</td></tr>`).join("")}</tbody>
+          </table>
+          <strong>遮住骨架，只留首字</strong>
+          <div class="first-char-row">${firstChars.map(c => `<div class="first-char-chip">${c}</div>`).join("")}</div>
+          <p class="step-desc">看著首字，把整個骨架接出來。</p>
+        `;
+      } else if (state.threeLayerLayer === 2) {
+        html += `
+          <div class="layer-hint">第二層：看骨架說大意。看著骨架，用自己的話講一遍。這時候不用跟課本一樣。</div>
+          <strong>骨架</strong>
+          <div class="skeleton-flow">${p.skeleton.map(s => `<div class="skeleton-node">${s}</div>`).join("")}</div>
+          <strong>白話大意（參考）</strong>
+          <div class="text-block plain-block">${p.plain}</div>
+          <p class="step-desc">先自己講一次，再對照下面的白話版本。意思有到就好。</p>
+        `;
+      } else {
+        html += `
+          <div class="layer-hint">第三層：貼回原文。把剛剛說的大意，慢慢換成課本的語氣。</div>
+          <strong>骨架</strong>
+          <div class="skeleton-flow">${p.skeleton.map(s => `<div class="skeleton-node">${s}</div>`).join("")}</div>
+          <strong>課文原文</strong>
+          <div class="text-block">${p.original}</div>
+          <p class="step-desc">念兩三遍後，把原文遮起來，只看骨架再說一次。</p>
+        `;
+      }
+
+      html += `</article>`;
+      box.innerHTML = html;
     }
 
     function renderLearn() {
@@ -1254,14 +1660,19 @@
         <article class="panel">
           <span class="tag">${p.tag}</span>
           <h2>段落 ${p.id}｜${p.title}</h2>
-          <strong>原文</strong>
-          <div class="text-block">${p.original}</div>
-          <strong>白話意思</strong>
+          <strong>第一層：骨架</strong>
+          <div class="text-block memory-block">${p.memory}</div>
+          <strong>意思單位 ↔ 記憶提示</strong>
+          <table class="units-table">
+            <thead><tr><th>意思單位</th><th>記憶提示</th></tr></thead>
+            <tbody>${p.units.map(u => `<tr><td>${u.meaning}</td><td class="cue">${u.cue}</td></tr>`).join("")}</tbody>
+          </table>
+          <strong>第二層：白話大意</strong>
           <div class="text-block plain-block">${p.plain}</div>
+          <strong>第三層：課文原文</strong>
+          <div class="text-block">${p.original}</div>
           <strong>關鍵詞晶片</strong>
           ${chips(p.keywords)}
-          <strong>記憶提示</strong>
-          <div class="text-block memory-block">${p.memory}</div>
           <div class="row-actions">
             <button class="small-btn" id="prevLearn">上一段</button>
             <button class="primary-btn" id="understandBtn">${state.understood.includes(p.id) ? "已讀懂 ✓" : "我已讀懂"}</button>
@@ -1592,14 +2003,25 @@
     }
 
     function renderParent() {
-      $("#parentCards").innerHTML = paragraphs.map(p => `
-        <article class="parent-card">
-          <span class="tag">段落 ${p.id}</span>
-          <h3>${p.title}</h3>
-          <ol class="question-list">${p.questions.map(q => `<li>${q}</li>`).join("")}</ol>
-          <div class="text-block memory-block">陪背小提示：${p.memory}</div>
-        </article>
-      `).join("");
+      $("#parentCards").innerHTML = paragraphs.map(p => {
+        const firstChars = p.skeleton.map(s => s.charAt(0));
+        return `
+          <article class="parent-card">
+            <span class="tag">段落 ${p.id}</span>
+            <h3>${p.title}</h3>
+            <strong>先問孩子</strong>
+            <ol class="question-list">${p.questions.map(q => `<li>${q}</li>`).join("")}</ol>
+            <strong>骨架</strong>
+            <div class="text-block memory-block">${p.memory}</div>
+            <strong>意思單位 ↔ 記憶提示</strong>
+            <table class="units-table">
+              <tbody>${p.units.map(u => `<tr><td>${u.meaning}</td><td class="cue">${u.cue}</td></tr>`).join("")}</tbody>
+            </table>
+            <strong>只留首字</strong>
+            <div class="first-char-row">${firstChars.map(c => `<div class="first-char-chip">${c}</div>`).join("")}</div>
+          </article>
+        `;
+      }).join("");
       $("#encouragementList").innerHTML = encouragements.map(item => `<li>${item}</li>`).join("");
     }
 
@@ -1611,6 +2033,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
       if (mode === "learn") renderLearn();
       if (mode === "skeleton") renderSkeleton();
+      if (mode === "threelayer") renderThreeLayer();
       if (mode === "test") renderTest();
       if (mode === "quiz" && $("#quizBox").children.length === 0) startQuiz();
       if (mode === "challenge") renderChallenge();
@@ -1655,6 +2078,7 @@
       renderStory();
       renderLearn();
       renderSkeleton();
+      renderThreeLayer();
       renderTest();
       renderParent();
       renderChallenge();
