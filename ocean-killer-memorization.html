@@ -138,7 +138,7 @@
       gap: 22px;
       padding: 20px 0 26px;
     }
-    .hero-layout, .learn-layout {
+    .hero-layout {
       display: grid;
       gap: 18px;
       align-items: start;
@@ -352,11 +352,6 @@
       transition: width .25s ease;
     }
 
-    .skeleton-panel {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
-    }
     .skeleton-card, .challenge-card, .parent-card {
       padding: 16px;
     }
@@ -501,7 +496,6 @@
       .topbar-inner { grid-template-columns: auto 1fr; align-items: center; }
       main { padding-top: 92px; }
       .hero-layout { grid-template-columns: minmax(0, 1.15fr) minmax(310px, .85fr); }
-      .learn-layout { grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr); }
       .card-grid, .challenge-grid, .parent-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .caption-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .original-text { font-size: 2rem; }
@@ -528,10 +522,8 @@
       <nav class="nav" aria-label="模式切換">
         <button data-mode="home">首頁</button>
         <button data-mode="story">故事模式</button>
-        <button data-mode="learn">逐段精讀</button>
         <button data-mode="comic">多格漫畫</button>
         <button data-mode="restore">原文還原</button>
-        <button data-mode="skeleton">關鍵詞骨架</button>
         <button data-mode="retell">自己說一遍</button>
         <button data-mode="challenge">15 分鐘闖關</button>
         <button data-mode="parent">家長陪背</button>
@@ -545,11 +537,10 @@
         <div class="hero-layout">
           <div>
             <h1>《海洋的殺手》七段背誦攻略小教室</h1>
-            <p class="subtitle">用七段故事線、多格漫畫、關鍵詞骨架和原文還原，把課文一步一步背起來。</p>
+            <p class="subtitle">用七段故事線、多格漫畫和原文還原，把課文一步一步背起來。</p>
             <div class="hero-actions">
               <button class="primary-btn" data-mode="story">開始故事模式</button>
               <button class="secondary-btn" data-mode="restore">我要背今天那一段</button>
-              <button class="small-btn" data-mode="learn">進入逐段精讀</button>
               <button class="small-btn" data-mode="challenge">15 分鐘闖關</button>
             </div>
             <div class="panel" style="margin-top:18px;">
@@ -584,21 +575,6 @@
       <div class="grid card-grid" id="storyCards"></div>
     </section>
 
-    <section id="learn" class="view">
-      <div class="section-head">
-        <h2>逐段精讀</h2>
-        <p>一次只練一段。讀懂後按下「我已讀懂」，進度會留在這台裝置裡。</p>
-      </div>
-      <div class="panel">
-        <div class="progress-meta">
-          <span id="learnProgressText"></span>
-          <span id="understoodText"></span>
-        </div>
-        <div class="progress-bar" aria-label="學習進度"><div class="progress-fill" id="learnProgressFill"></div></div>
-      </div>
-      <div class="learn-layout" id="learnContent" style="margin-top:14px;"></div>
-    </section>
-
     <section id="comic" class="view">
       <div class="section-head">
         <h2>多格漫畫記憶</h2>
@@ -611,31 +587,17 @@
     <section id="restore" class="view">
       <div class="section-head">
         <h2>原文還原</h2>
-        <p>從短骨架、句首提示、關鍵詞填空到完整遮蔽，讓提示一層一層退場。</p>
+        <p>從短骨架、關鍵詞填空到完整遮蔽，讓提示一層一層退場。</p>
       </div>
       <div class="panel">
         <div class="mode-actions">
           <select class="text-input" id="restoreSelect" aria-label="選擇段落" style="max-width:260px;"></select>
           <button class="small-btn restore-level-btn" data-restore-level="1">Level 1 短骨架</button>
-          <button class="small-btn restore-level-btn" data-restore-level="2">Level 2 句首提示</button>
-          <button class="small-btn restore-level-btn" data-restore-level="3">Level 3 關鍵詞填空</button>
-          <button class="small-btn restore-level-btn" data-restore-level="4">Level 4 完整遮蔽</button>
+          <button class="small-btn restore-level-btn" data-restore-level="2">Level 2 關鍵詞填空</button>
+          <button class="small-btn restore-level-btn" data-restore-level="3">Level 3 完整遮蔽</button>
         </div>
       </div>
       <div id="restoreContent" style="margin-top:14px;"></div>
-    </section>
-
-    <section id="skeleton" class="view">
-      <div class="section-head">
-        <h2>關鍵詞骨架</h2>
-        <p>七段短版骨架是背誦的主幹。遮住的節點可以點一下翻開，慢慢把提示拿掉。</p>
-      </div>
-      <div class="mode-actions">
-        <button class="small-btn skeleton-mode-btn" data-skeleton-mode="full">完整骨架</button>
-        <button class="small-btn skeleton-mode-btn" data-skeleton-mode="first">只看第一個詞</button>
-        <button class="small-btn skeleton-mode-btn" data-skeleton-mode="hidden">全部遮住</button>
-      </div>
-      <div class="skeleton-panel" id="skeletonPanel"></div>
     </section>
 
     <section id="retell" class="view">
@@ -676,7 +638,7 @@
       <div class="challenge-grid" id="challengeGrid" style="margin-top:14px;"></div>
       <div class="panel hidden" id="challengeDone" style="margin-top:14px;">
         <h2>你已經完成《海洋的殺手》七段背誦攻略！</h2>
-        <p>很好，你已經把故事線、關鍵詞和背誦順序都練過一輪了。睡前再用骨架模式快速說一次，就更穩了。</p>
+        <p>很好，你已經把故事線、關鍵詞和背誦順序都練過一輪了。睡前再用提示卡快速說一次，就更穩了。</p>
       </div>
     </section>
 
@@ -723,7 +685,7 @@
     const lessonData = {
       id: "ocean-killer",
       title: "《海洋的殺手》七段背誦攻略小教室",
-      subtitle: "用七段故事線、關鍵詞骨架和互動測驗，把課文一步一步背起來。",
+      subtitle: "用七段故事線、多格漫畫和原文還原，把課文一步一步背起來。",
       totalRoute: [
         "美麗小島有垃圾",
         "黃色小鴨解開謎團",
@@ -834,9 +796,9 @@
     const processSteps = [
       { title: "先看七段故事線", desc: "先知道整篇從美麗小島一路講到海洋警訊。" },
       { title: "背七段短標題", desc: "美麗小島、小鴨洋流、塑膠微粒、海洋殺手、塑膠災難、源頭減塑、海洋警訊。" },
-      { title: "背每段關鍵詞骨架", desc: "每段先記四到五個短節點，順序對就成功一半。" },
-      { title: "用原文還原練提取", desc: "從短骨架、句首、關鍵詞到完整遮蔽，慢慢把提示拿掉。" },
-      { title: "自己說一遍", desc: "不用白話題目轟炸，只用七段畫面和骨架把整篇講出來。" },
+      { title: "看多格漫畫", desc: "用畫面記住每段轉折，避免只靠文字硬背。" },
+      { title: "用原文還原練提取", desc: "從短骨架、關鍵詞填空到完整遮蔽，慢慢把提示拿掉。" },
+      { title: "自己說一遍", desc: "不用白話題目轟炸，只用七段畫面和提示把整篇講出來。" },
       { title: "睡前再背一次", desc: "睡前用短版骨架快速說一輪，明天更穩。" }
     ];
 
@@ -855,11 +817,11 @@
 
     const challengeStages = [
       { title: "關卡 1｜2 分鐘", minutes: 2, task: "看七段故事總覽。", mode: "story" },
-      { title: "關卡 2｜2 分鐘", minutes: 2, task: "背第一段骨架：美麗小島與垃圾來源之謎。", mode: "skeleton" },
-      { title: "關卡 3｜3 分鐘", minutes: 3, task: "背第二段骨架：黃色小鴨與洋流漂流。", mode: "skeleton" },
-      { title: "關卡 4｜3 分鐘", minutes: 3, task: "背第三段骨架：塑膠微粒與食物鏈。", mode: "skeleton" },
-      { title: "關卡 5｜2 分鐘", minutes: 2, task: "背第四、第五段骨架：海洋殺手與塑膠災難。", mode: "skeleton" },
-      { title: "關卡 6｜2 分鐘", minutes: 2, task: "背第六段骨架：源頭減塑與行動。", mode: "skeleton" },
+      { title: "關卡 2｜2 分鐘", minutes: 2, task: "背第一段：美麗小島與垃圾來源之謎。", mode: "restore" },
+      { title: "關卡 3｜3 分鐘", minutes: 3, task: "看第二段漫畫：黃色小鴨與洋流漂流。", mode: "comic" },
+      { title: "關卡 4｜3 分鐘", minutes: 3, task: "背第三段：塑膠微粒與食物鏈。", mode: "restore" },
+      { title: "關卡 5｜2 分鐘", minutes: 2, task: "背第四、第五段：海洋殺手與塑膠災難。", mode: "restore" },
+      { title: "關卡 6｜2 分鐘", minutes: 2, task: "自己說第六段：源頭減塑與行動。", mode: "retell" },
       { title: "關卡 7｜1 分鐘", minutes: 1, task: "背第七段結尾警訊。", mode: "restore" }
     ];
 
@@ -874,16 +836,12 @@
     };
 
     const STORAGE_PREFIX = "memorization-ocean-killer-";
-    const storageNames = ["lastMode", "learnIndex", "understood", "challengeStage", "challengeDone", "todaySection", "restoreIndex", "restoreLevel", "restoreStats"];
+    const storageNames = ["lastMode", "challengeStage", "challengeDone", "todaySection", "restoreIndex", "restoreLevel", "restoreStats"];
     const state = {
       mode: loadString("lastMode", "home"),
-      learnIndex: Number(loadString("learnIndex", "0")),
       todaySection: Number(loadString("todaySection", "1")),
-      understood: loadJSON("understood", []),
       comicIndex: 0,
       comicDetail: "hint",
-      skeletonMode: "full",
-      skeletonRevealed: {},
       restoreIndex: Number(loadString("restoreIndex", "0")),
       restoreLevel: Number(loadString("restoreLevel", "1")),
       restoreRevealed: false,
@@ -1040,20 +998,21 @@
       });
     }
 
-    function splitSentences(text) {
-      return text.split(/(?<=[。！？])/).map(item => item.trim()).filter(Boolean);
-    }
-    function getSentenceStarters(section) {
-      return splitSentences(section.originalText).map(sentence => `${sentence.slice(0, Math.min(6, sentence.length))}……`);
+    function splitComicFragments(section) {
+      const parts = section.originalText
+        .match(/[^，。！？；]+[，。！？；]?/g)
+        .map(item => item.trim())
+        .filter(item => item.length >= 4);
+      return Array.from(new Set(parts));
     }
 
     function comicPanelsHTML(section, detailMode) {
       const titles = comicSpecs[section.id] || section.shortSkeleton;
-      const sentences = splitSentences(section.originalText);
+      const fragments = splitComicFragments(section);
       const captions = detailMode === "image" ? "" : `
         <div class="caption-grid">${titles.map((title, index) => {
-          const hint = section.skeleton[index] || section.shortSkeleton[index % section.shortSkeleton.length] || section.memoryHint;
-          const original = sentences[index] || section.originalText;
+          const hint = section.skeleton[index] || section.shortSkeleton[index] || section.memoryHint;
+          const original = fragments[index] || hint;
           return `
             <div class="caption-card">
               <h4>第 ${index + 1} 格｜${title}</h4>
@@ -1111,12 +1070,10 @@
         body = `<strong>看短骨架說大意</strong><div class="skeleton-flow" style="margin-top:10px;">${nodes(section.shortSkeleton)}</div>`;
       }
       if (state.restoreLevel === 2) {
-        body = `<strong>句首提示，請接回原文</strong>${chips(getSentenceStarters(section))}`;
+        const blanks = selectRestoreKeywords(section);
+        body = `<strong>關鍵詞填空</strong><div class="text-block original-text">${maskLevelOne(section.originalText, blanks)}</div><div class="summary">這一關會遮住 ${blanks.length} 個重要詞，先憑上下文補回來，再按「揭曉原文」。</div>`;
       }
       if (state.restoreLevel === 3) {
-        body = `<strong>關鍵詞填空</strong><div class="text-block original-text">${maskLevelOne(section.originalText, section.keywords.slice(0, 10))}</div>`;
-      }
-      if (state.restoreLevel === 4) {
         body = `<strong>完整遮蔽：只看漫畫與段落標題背一次</strong>${comicPanelsHTML(section, "image")}`;
       }
       $("#restoreContent").innerHTML = `
@@ -1152,82 +1109,20 @@
       });
     }
 
-    function renderLearn() {
-      const section = sections[state.learnIndex] || sections[0];
-      const understoodCount = state.understood.filter(id => sections.some(item => item.id === id)).length;
-      $("#learnProgressText").textContent = `第 ${state.learnIndex + 1} / ${sections.length} 段`;
-      $("#understoodText").textContent = `已讀懂 ${understoodCount} 段`;
-      $("#learnProgressFill").style.width = `${((state.learnIndex + 1) / sections.length) * 100}%`;
-      const content = $("#learnContent");
-      content.innerHTML = `
-        <div class="panel"><div class="ill-holder"></div></div>
-        <article class="panel">
-          <span class="tag">${section.shortTitle}</span>
-          <h2>第 ${section.id} 段｜${section.title}</h2>
-          <strong>課文原文</strong>
-          <div class="text-block original-text">${section.originalText}</div>
-          <strong>白話意思</strong>
-          <div class="text-block plain-block">${section.plainText}</div>
-          <strong>關鍵詞 chip</strong>
-          ${chips(section.keywords)}
-          <strong>記憶提示</strong>
-          <div class="text-block memory-block">${section.memoryHint}</div>
-          <strong>背誦骨架</strong>
-          <div class="skeleton-flow">${nodes(section.skeleton)}</div>
-          <div class="row-actions">
-            <button class="small-btn" id="prevLearn">上一段</button>
-            <button class="primary-btn" id="understandBtn">${state.understood.includes(section.id) ? "已讀懂" : "我已讀懂"}</button>
-            <button class="small-btn" id="nextLearn">下一段</button>
-          </div>
-        </article>`;
-      $(".ill-holder", content).appendChild(createIllustration(section));
-      $("#prevLearn").disabled = state.learnIndex === 0;
-      $("#nextLearn").disabled = state.learnIndex === sections.length - 1;
-      $("#prevLearn").addEventListener("click", () => {
-        state.learnIndex = Math.max(0, state.learnIndex - 1);
-        save("learnIndex", String(state.learnIndex));
-        renderLearn();
-      });
-      $("#nextLearn").addEventListener("click", () => {
-        state.learnIndex = Math.min(sections.length - 1, state.learnIndex + 1);
-        save("learnIndex", String(state.learnIndex));
-        renderLearn();
-      });
-      $("#understandBtn").addEventListener("click", () => {
-        if (!state.understood.includes(section.id)) {
-          state.understood.push(section.id);
-          save("understood", state.understood);
-        }
-        renderLearn();
-      });
-    }
-
-    function renderSkeleton() {
-      $all(".skeleton-mode-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.skeletonMode === state.skeletonMode);
-      });
-      const panel = $("#skeletonPanel");
-      panel.innerHTML = "";
-      sections.forEach(section => {
-        const card = document.createElement("article");
-        card.className = "skeleton-card";
-        card.innerHTML = `<h3>第 ${section.id} 段｜${section.shortTitle}</h3><p class="summary">${section.title}</p><div class="skeleton-flow"></div><details style="margin-top:12px;"><summary><strong>完整骨架</strong></summary><div class="skeleton-flow" style="margin-top:10px;">${nodes(section.skeleton)}</div></details>`;
-        const flow = $(".skeleton-flow", card);
-        section.shortSkeleton.forEach((item, index) => {
-          const key = `${section.id}-${index}`;
-          const shouldShow = state.skeletonMode === "full" || (state.skeletonMode === "first" && index === 0) || state.skeletonRevealed[key];
-          const node = document.createElement("button");
-          node.type = "button";
-          node.className = `skeleton-node ${shouldShow ? "" : "masked"}`;
-          node.textContent = shouldShow ? item : "點我翻開";
-          node.addEventListener("click", () => {
-            state.skeletonRevealed[key] = true;
-            renderSkeleton();
-          });
-          flow.appendChild(node);
-        });
-        panel.appendChild(card);
-      });
+    function selectRestoreKeywords(section) {
+      const smallWords = new Set(["然而", "未來", "大海", "海面", "深海", "威脅"]);
+      const candidates = section.keywords
+        .map(word => ({ word, pos: section.originalText.indexOf(word) }))
+        .filter(item => item.word.length >= 2 && !smallWords.has(item.word) && item.pos >= 0)
+        .sort((a, b) => a.pos - b.pos);
+      const targetCount = Math.min(14, Math.max(6, Math.ceil(candidates.length * 0.6)));
+      if (candidates.length <= targetCount) return candidates.map(item => item.word);
+      const selected = [];
+      for (let i = 0; i < targetCount; i += 1) {
+        const index = Math.round(i * (candidates.length - 1) / (targetCount - 1));
+        selected.push(candidates[index].word);
+      }
+      return Array.from(new Set(selected));
     }
 
     function maskLevelOne(text, keywords) {
@@ -1350,15 +1245,14 @@
     }
 
     function switchMode(mode) {
+      if (!document.getElementById(mode)) mode = "home";
       state.mode = mode;
       save("lastMode", mode);
       $all(".view").forEach(view => view.classList.toggle("active", view.id === mode));
       $all("[data-mode]").forEach(btn => btn.classList.toggle("active", btn.dataset.mode === mode));
       window.scrollTo({ top: 0, behavior: "smooth" });
-      if (mode === "learn") renderLearn();
       if (mode === "comic") renderComic();
       if (mode === "restore") renderRestore();
-      if (mode === "skeleton") renderSkeleton();
       if (mode === "retell") renderRetell();
       if (mode === "challenge") renderChallenge();
       if (mode === "parent") renderParent();
@@ -1367,13 +1261,6 @@
     function bindEvents() {
       $all("[data-mode]").forEach(btn => {
         btn.addEventListener("click", () => switchMode(btn.dataset.mode));
-      });
-      $all(".skeleton-mode-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-          state.skeletonMode = btn.dataset.skeletonMode;
-          state.skeletonRevealed = {};
-          renderSkeleton();
-        });
       });
       $all(".restore-level-btn").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -1418,22 +1305,19 @@
     }
 
     function init() {
-      state.learnIndex = Math.min(Math.max(state.learnIndex, 0), sections.length - 1);
       state.restoreIndex = Math.min(Math.max(state.restoreIndex, 0), sections.length - 1);
-      state.restoreLevel = [1, 2, 3, 4].includes(state.restoreLevel) ? state.restoreLevel : 1;
+      state.restoreLevel = [1, 2, 3].includes(state.restoreLevel) ? state.restoreLevel : 1;
       state.challengeStage = Math.min(Math.max(state.challengeStage, 0), challengeStages.length);
       state.challengeDone = state.challengeDone.filter(index => index >= 0 && index < challengeStages.length);
       renderHome();
       renderStory();
-      renderLearn();
       renderComic();
       renderRestore();
-      renderSkeleton();
       renderRetell();
       renderParent();
       renderChallenge();
       bindEvents();
-      switchMode(document.getElementById(state.mode) ? state.mode : "home");
+      switchMode(state.mode);
     }
 
     init();
