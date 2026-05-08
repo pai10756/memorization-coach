@@ -593,14 +593,15 @@
     <section id="restore" class="view">
       <div class="section-head">
         <h2>原文還原</h2>
-        <p>從短骨架、關鍵詞填空到完整遮蔽，讓提示一層一層退場。</p>
+        <p>從短骨架、關鍵詞填空、高遮蔽填空到完整遮蔽，讓提示一層一層退場。</p>
       </div>
       <div class="panel">
         <div class="mode-actions">
           <select class="text-input" id="restoreSelect" aria-label="選擇段落" style="max-width:260px;"></select>
           <button class="small-btn restore-level-btn" data-restore-level="1">Level 1 短骨架</button>
           <button class="small-btn restore-level-btn" data-restore-level="2">Level 2 關鍵詞填空</button>
-          <button class="small-btn restore-level-btn" data-restore-level="3">Level 3 完整遮蔽</button>
+          <button class="small-btn restore-level-btn" data-restore-level="3">Level 3 高遮蔽填空</button>
+          <button class="small-btn restore-level-btn" data-restore-level="4">Level 4 完整遮蔽</button>
         </div>
       </div>
       <div id="restoreContent" style="margin-top:14px;"></div>
@@ -803,7 +804,7 @@
       { title: "先看七段故事線", desc: "先知道整篇從美麗小島一路講到海洋警訊。" },
       { title: "背七段短標題", desc: "美麗小島、小鴨洋流、塑膠微粒、海洋殺手、塑膠災難、源頭減塑、海洋警訊。" },
       { title: "看多格漫畫", desc: "用畫面記住每段轉折，避免只靠文字硬背。" },
-      { title: "用原文還原練提取", desc: "從短骨架、關鍵詞填空到完整遮蔽，慢慢把提示拿掉。" },
+      { title: "用原文還原練提取", desc: "從短骨架、關鍵詞填空、高遮蔽填空到完整遮蔽，慢慢把提示拿掉。" },
       { title: "自己說一遍", desc: "不用白話題目轟炸，只用七段畫面和提示把整篇講出來。" },
       { title: "睡前再背一次", desc: "睡前用短版骨架快速說一輪，明天更穩。" }
     ];
@@ -1005,22 +1006,38 @@
     }
 
     function splitComicFragments(section) {
-      const parts = section.originalText
-        .match(/[^，。！？；]+[，。！？；]?/g)
+      return (section.originalText.match(/[^，。！？；]+[，。！？；]?/g) || [section.originalText])
         .map(item => item.trim())
-        .filter(item => item.length >= 4);
-      return Array.from(new Set(parts));
+        .filter(Boolean);
+    }
+    function comicOriginalPanels(section, panelCount) {
+      const fragments = splitComicFragments(section);
+      const panels = Array.from({ length: panelCount }, () => []);
+      const totalLength = fragments.reduce((sum, item) => sum + item.length, 0);
+      const targetLength = Math.max(1, totalLength / panelCount);
+      let panelIndex = 0;
+      let currentLength = 0;
+      fragments.forEach((fragment, index) => {
+        panels[panelIndex].push(fragment);
+        currentLength += fragment.length;
+        const remainingFragments = fragments.length - index - 1;
+        const remainingPanels = panelCount - panelIndex - 1;
+        if (panelIndex < panelCount - 1 && currentLength >= targetLength * (panelIndex + 1) && remainingFragments >= remainingPanels) {
+          panelIndex += 1;
+        }
+      });
+      return panels.map(items => items.join(""));
     }
 
     function comicPanelsHTML(section, detailMode) {
       const titles = comicSpecs[section.id] || section.shortSkeleton;
-      const fragments = splitComicFragments(section);
+      const originalPanels = comicOriginalPanels(section, titles.length);
       const isTextMode = detailMode === "text";
       const captions = detailMode === "image" ? "" : `
         <h3 style="margin-top:16px;">${isTextMode ? "原文片段" : "畫面提示"}</h3>
         <div class="caption-grid">${titles.map((title, index) => {
           const hint = section.skeleton[index] || section.shortSkeleton[index] || section.memoryHint;
-          const original = fragments[index] || hint;
+          const original = originalPanels[index] || hint;
           return `
             <div class="caption-card">
               <h4>第 ${index + 1} 格｜${title}</h4>
@@ -1078,10 +1095,14 @@
         body = `<strong>看短骨架說大意</strong><div class="skeleton-flow" style="margin-top:10px;">${nodes(section.shortSkeleton)}</div>`;
       }
       if (state.restoreLevel === 2) {
-        const blanks = selectRestoreKeywords(section);
+        const blanks = selectRestoreKeywords(section, 2);
         body = `<strong>關鍵詞填空</strong><div class="text-block original-text">${maskLevelOne(section.originalText, blanks)}</div><div class="summary">這一關會遮住 ${blanks.length} 個重要詞，先憑上下文補回來，再按「揭曉原文」。</div>`;
       }
       if (state.restoreLevel === 3) {
+        const blanks = selectRestoreKeywords(section, 3);
+        body = `<strong>高遮蔽填空</strong><div class="text-block original-text">${maskLevelOne(section.originalText, blanks)}</div><div class="summary">這一關會遮住 ${blanks.length} 個重點詞句，請先靠段落畫面和上下文把原文接回來。</div>`;
+      }
+      if (state.restoreLevel === 4) {
         body = `<strong>完整遮蔽：只看漫畫與段落標題背一次</strong>${comicPanelsHTML(section, "image")}`;
       }
       $("#restoreContent").innerHTML = `
@@ -1117,18 +1138,33 @@
       });
     }
 
-    function selectRestoreKeywords(section) {
+    function pickEvenly(items, targetCount) {
+      if (items.length <= targetCount) return items.slice();
+      const selected = [];
+      for (let i = 0; i < targetCount; i += 1) {
+        const index = Math.round(i * (items.length - 1) / (targetCount - 1));
+        selected.push(items[index]);
+      }
+      return Array.from(new Set(selected));
+    }
+
+    function selectRestoreKeywords(section, level = 2) {
       const smallWords = new Set(["然而", "未來", "大海", "海面", "深海", "威脅"]);
       const candidates = section.keywords
         .map(word => ({ word, pos: section.originalText.indexOf(word) }))
         .filter(item => item.word.length >= 2 && !smallWords.has(item.word) && item.pos >= 0)
         .sort((a, b) => a.pos - b.pos);
-      const targetCount = Math.min(14, Math.max(6, Math.ceil(candidates.length * 0.6)));
-      if (candidates.length <= targetCount) return candidates.map(item => item.word);
-      const selected = [];
-      for (let i = 0; i < targetCount; i += 1) {
-        const index = Math.round(i * (candidates.length - 1) / (targetCount - 1));
-        selected.push(candidates[index].word);
+      const density = level === 3 ? 0.9 : 0.7;
+      const maxCount = level === 3 ? 22 : 16;
+      const minCount = level === 3 ? 9 : 7;
+      const targetCount = Math.min(maxCount, Math.max(minCount, Math.ceil(candidates.length * density)));
+      const selected = pickEvenly(candidates.map(item => item.word), targetCount);
+      if (level === 3) {
+        const phraseBlanks = splitComicFragments(section)
+          .map(fragment => fragment.replace(/[，。！？；]+$/g, ""))
+          .filter(fragment => fragment.length >= 4 && fragment.length <= 18)
+          .filter(fragment => !selected.some(word => fragment.includes(word) || word.includes(fragment)));
+        selected.push(...pickEvenly(phraseBlanks, Math.min(8, Math.max(3, Math.ceil(phraseBlanks.length * 0.45)))));
       }
       return Array.from(new Set(selected));
     }
@@ -1314,7 +1350,7 @@
 
     function init() {
       state.restoreIndex = Math.min(Math.max(state.restoreIndex, 0), sections.length - 1);
-      state.restoreLevel = [1, 2, 3].includes(state.restoreLevel) ? state.restoreLevel : 1;
+      state.restoreLevel = [1, 2, 3, 4].includes(state.restoreLevel) ? state.restoreLevel : 1;
       state.challengeStage = Math.min(Math.max(state.challengeStage, 0), challengeStages.length);
       state.challengeDone = state.challengeDone.filter(index => index >= 0 && index < challengeStages.length);
       renderHome();
